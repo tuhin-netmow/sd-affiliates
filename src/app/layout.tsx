@@ -31,6 +31,11 @@ export default function RootLayout({
       lang="en"
       className={`${poppins.variable} font-sans scroll-smooth h-full antialiased`}
     >
+      <head>
+        <link rel="icon" type="image/png" href="https://squaddeck.com/wp-content/uploads/2024/08/Favicon.png" />
+        <link rel="shortcut icon" href="https://squaddeck.com/wp-content/uploads/2024/08/Favicon.png" />
+        <link rel="apple-touch-icon" href="https://squaddeck.com/wp-content/uploads/2024/08/Favicon.png" />
+      </head>
       <body className="min-h-full flex flex-col bg-background text-foreground selection:bg-[#8B14C2]/20 selection:text-[#27125B]">
         <ToastProvider>
           <AffiliateDemoProvider>
