@@ -27,16 +27,38 @@ import {
   Check,
   Star,
   Flame,
-  MousePointerClick,
+  ExternalLink,
+  Compass,
+  BookOpen,
+  RotateCcw,
+  UserPlus,
   ArrowUp
 } from 'lucide-react'
 import { useEffect } from 'react'
 import { MainHeader } from '@/components/shared/main-header'
 import { MainFooter } from '@/components/shared/main-footer'
+import { useAffiliateDemo } from '@/context/affiliate-demo-context'
 
 export default function HomePage() {
   const [activeTab, setActiveTab] = useState<'affiliate' | 'admin' | 'demo'>('affiliate')
   const [showBackToTop, setShowBackToTop] = useState(false)
+
+  const {
+    demoWorkflow,
+    simulateReferralClick,
+    simulateSignup,
+    simulateUpgradeCustomer,
+    simulateGenerateCommission,
+    approveCommission,
+    makeCommissionPayable,
+    requestPayout,
+    approvePayout,
+    markPayoutPaid,
+    activeAffiliate,
+    customers,
+    commissions,
+    payouts
+  } = useAffiliateDemo()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,7 +78,7 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col selection:bg-[#8B14C2]/20 selection:text-[#27125B] font-sans relative overflow-x-hidden">
-      
+
       {/* Cool Light Ambient Background Glows & Floating Animations */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
         <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-gradient-to-br from-purple-200/40 via-purple-100/20 to-transparent rounded-full blur-3xl animate-pulse duration-10000"></div>
@@ -140,7 +162,7 @@ export default function HomePage() {
         {/* PORTAL GATEWAY SECTION */}
         <section className="space-y-6 animate-in fade-in slide-in-from-bottom-6 duration-700">
           <div className="text-center space-y-2 max-w-xl mx-auto">
-            <span className="text-xs font-bold text-[#8B14C2] uppercase tracking-wider px-3.5 py-1 rounded-full bg-purple-50 border border-purple-100 shadow-sm">
+            <span className="text-xs font-bold text-[#8B14C2] uppercase tracking-wider px-3.5 py-1 rounded-full bg-purple-50 border border-purple-100 shadow-sm inline-block">
               Access & Gateway
             </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-[#27125B]">Choose Your Portal Experience</h2>
@@ -259,7 +281,7 @@ export default function HomePage() {
         {/* AFFILIATE BENEFITS SECTION */}
         <section id="benefits" className="space-y-12 pt-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
           <div className="text-center space-y-3 max-w-2xl mx-auto">
-            <span className="text-xs font-bold text-[#8B14C2] uppercase tracking-wider px-3.5 py-1 rounded-full bg-purple-50 border border-purple-200 shadow-sm">
+            <span className="text-xs font-bold text-[#8B14C2] uppercase tracking-wider px-3.5 py-1 rounded-full bg-purple-50 border border-purple-200 shadow-sm inline-block">
               Why Partner With SquadDeck
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[#27125B] tracking-tight">
@@ -271,7 +293,7 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            
+
             {/* Benefit 1 */}
             <div className="group p-7 rounded-3xl bg-white border border-slate-200/80 shadow-md hover:shadow-xl transition-all duration-300 space-y-4 hover:-translate-y-1.5 hover:border-purple-200">
               <div className="w-12 h-12 rounded-2xl bg-purple-50 border border-purple-100 flex items-center justify-center text-[#27125B] group-hover:bg-[#8B14C2] group-hover:text-white transition-colors duration-300">
@@ -402,7 +424,7 @@ export default function HomePage() {
         {/* HOW IT WORKS SECTION */}
         <section id="how-it-works" className="space-y-12 pt-4 animate-in fade-in slide-in-from-bottom-8 duration-700">
           <div className="text-center space-y-3 max-w-xl mx-auto">
-            <span className="text-xs font-bold text-[#8B14C2] uppercase tracking-wider px-3.5 py-1 rounded-full bg-purple-50 border border-purple-200 shadow-sm">
+            <span className="text-xs font-bold text-[#8B14C2] uppercase tracking-wider px-3.5 py-1 rounded-full bg-purple-50 border border-purple-200 shadow-sm inline-block">
               Simple 3-Step Process
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[#27125B]">How the Affiliate Program Works</h2>
@@ -410,7 +432,7 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-            
+
             {/* Step 1 */}
             <div className="group bg-white rounded-3xl p-8 border border-slate-200/80 shadow-md hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 relative space-y-4">
               <div className="w-10 h-10 rounded-xl bg-[#27125B] text-white font-black text-sm flex items-center justify-center group-hover:scale-110 group-hover:bg-[#8B14C2] transition-all duration-300 shadow-md">
@@ -451,7 +473,7 @@ export default function HomePage() {
         {/* COMMISSION TIERS SHOWCASE */}
         <section id="tiers" className="space-y-8 pt-4 animate-in fade-in slide-in-from-bottom-8 duration-700">
           <div className="text-center space-y-2 max-w-xl mx-auto">
-            <span className="text-xs font-bold text-[#8B14C2] uppercase tracking-wider px-3.5 py-1 rounded-full bg-purple-50 border border-purple-200 shadow-sm">
+            <span className="text-xs font-bold text-[#8B14C2] uppercase tracking-wider px-3.5 py-1 rounded-full bg-purple-50 border border-purple-200 shadow-sm inline-block">
               Tier Progression
             </span>
             <h2 className="text-3xl font-extrabold text-[#27125B]">Commission Tier Structure</h2>
@@ -459,7 +481,7 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            
+
             {/* Bronze Tier */}
             <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 space-y-4 text-center group">
               <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-amber-100 text-amber-800 border border-amber-200">
@@ -518,6 +540,164 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* INTERACTIVE PROTOTYPE & FEATURE MAP SECTION */}
+        <section id="how-it-works" className="space-y-8 pt-4 animate-in fade-in slide-in-from-bottom-8 duration-700">
+          <div className="text-center space-y-3 max-w-2xl mx-auto">
+            <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#8B14C2] uppercase tracking-wider px-3.5 py-1 rounded-full bg-purple-50 border border-purple-200 shadow-sm">
+              <Compass className="w-3.5 h-3.5 text-[#8B14C2]" />
+              Self-Describing Prototype Architecture
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-black text-[#27125B]">
+              Interactive 10-Step Workflow & System Map
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              This application is a complete client-side prototype. Trigger any stage below to simulate real-time referral link clicks, customer signups, paid subscription upgrades, commission calculations, and payout approvals!
+            </p>
+          </div>
+
+          {/* Interactive Stepper Bar on Homepage */}
+          <div className="p-6 bg-white rounded-3xl border border-slate-200 shadow-xl space-y-6">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-slate-100 pb-4">
+              <div>
+                <h3 className="text-sm font-bold text-[#27125B] flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-[#8B14C2]" />
+                  Active Demo Simulation State: Step {demoWorkflow.currentStep} of 10
+                </h3>
+                <p className="text-xs text-slate-500">
+                  Active Partner: <strong className="text-slate-900">{activeAffiliate.name}</strong> ({activeAffiliate.referralCode})
+                </p>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <Link
+                  href="/demo"
+                  className="px-4 py-2 text-xs font-bold text-white bg-[#8B14C2] hover:bg-[#720fa2] rounded-xl shadow-md transition-all flex items-center gap-1.5"
+                >
+                  <Play className="w-3.5 h-3.5 fill-white" />
+                  <span>Launch Control Center</span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Quick Action Triggers Grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
+              <button
+                onClick={() => simulateReferralClick()}
+                className="p-3 rounded-2xl bg-indigo-50 border border-indigo-100 hover:border-indigo-300 text-left transition-all group"
+              >
+                <span className="text-[10px] font-bold text-indigo-600 block uppercase">Step 4</span>
+                <span className="text-xs font-bold text-slate-900 group-hover:text-indigo-600 block">Simulate Click</span>
+                <span className="text-[10px] text-slate-500">Clicks: {demoWorkflow.referralClicksCount}</span>
+              </button>
+
+              <button
+                onClick={() => simulateSignup('Riverside Basketball Club', 'Free')}
+                className="p-3 rounded-2xl bg-emerald-50 border border-emerald-100 hover:border-emerald-300 text-left transition-all group"
+              >
+                <span className="text-[10px] font-bold text-emerald-600 block uppercase">Step 5</span>
+                <span className="text-xs font-bold text-slate-900 group-hover:text-emerald-600 block">Free Sign Up</span>
+                <span className="text-[10px] text-slate-500">Org: Riverside</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  const targetId = demoWorkflow.simulatedCustomerId || customers[0]?.id || 'cust-1'
+                  simulateUpgradeCustomer(targetId, 'Pro')
+                }}
+                className="p-3 rounded-2xl bg-purple-50 border border-purple-100 hover:border-purple-300 text-left transition-all group"
+              >
+                <span className="text-[10px] font-bold text-purple-600 block uppercase">Step 6 & 7</span>
+                <span className="text-xs font-bold text-slate-900 group-hover:text-purple-600 block">Paid Upgrade</span>
+                <span className="text-[10px] text-slate-500">Plan: Pro ($49/mo)</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  const targetCommId = demoWorkflow.simulatedCommissionId || commissions[0]?.id || 'comm-101'
+                  approveCommission(targetCommId)
+                  makeCommissionPayable(targetCommId)
+                }}
+                className="p-3 rounded-2xl bg-amber-50 border border-amber-100 hover:border-amber-300 text-left transition-all group"
+              >
+                <span className="text-[10px] font-bold text-amber-700 block uppercase">Step 8</span>
+                <span className="text-xs font-bold text-slate-900 group-hover:text-amber-700 block">Approve Comm.</span>
+                <span className="text-[10px] text-slate-500">Make Payable</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  requestPayout(activeAffiliate.id, activeAffiliate.stats.currentBalance || 50, 'PayPal')
+                  const targetPayoutId = demoWorkflow.simulatedPayoutId || payouts[0]?.id || 'payout-1'
+                  approvePayout(targetPayoutId)
+                  markPayoutPaid(targetPayoutId)
+                }}
+                className="p-3 rounded-2xl bg-rose-50 border border-rose-100 hover:border-rose-300 text-left transition-all group col-span-2 sm:col-span-1"
+              >
+                <span className="text-[10px] font-bold text-rose-600 block uppercase">Step 9 & 10</span>
+                <span className="text-xs font-bold text-slate-900 group-hover:text-rose-600 block">Complete Payout</span>
+                <span className="text-[10px] text-slate-500">Paid to PayPal</span>
+              </button>
+            </div>
+
+            {/* Feature Exploration Matrix */}
+            <div className="pt-4 border-t border-slate-100 space-y-4">
+              <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2">
+                <BookOpen className="w-4 h-4 text-[#8B14C2]" />
+                Explore All Prototype Features Across Portals
+              </h4>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Affiliate Portal Column */}
+                <div className="p-4 rounded-2xl bg-purple-50/50 border border-purple-100 space-y-3">
+                  <div className="flex items-center justify-between border-b border-purple-100 pb-2">
+                    <span className="text-xs font-bold text-[#27125B] flex items-center gap-1.5">
+                      <LayoutDashboard className="w-4 h-4 text-[#8B14C2]" />
+                      Affiliate Portal Views (11 Features)
+                    </span>
+                    <Link href="/affiliate/dashboard" className="text-[11px] font-bold text-[#8B14C2] hover:underline flex items-center gap-0.5">
+                      <span>Open Portal</span>
+                      <ExternalLink className="w-3 h-3" />
+                    </Link>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2 text-xs">
+                    <Link href="/affiliate/dashboard" className="p-2 rounded-xl bg-white border border-purple-100 hover:border-purple-300 text-slate-700 font-medium">Dashboard Overview</Link>
+                    <Link href="/affiliate/links" className="p-2 rounded-xl bg-white border border-purple-100 hover:border-purple-300 text-slate-700 font-medium">Referral Links</Link>
+                    <Link href="/affiliate/coupons" className="p-2 rounded-xl bg-white border border-purple-100 hover:border-purple-300 text-slate-700 font-medium">Promo Coupons</Link>
+                    <Link href="/affiliate/customers" className="p-2 rounded-xl bg-white border border-purple-100 hover:border-purple-300 text-slate-700 font-medium">Referred Customers</Link>
+                    <Link href="/affiliate/commissions" className="p-2 rounded-xl bg-white border border-purple-100 hover:border-purple-300 text-slate-700 font-medium">Commissions Log</Link>
+                    <Link href="/affiliate/payouts" className="p-2 rounded-xl bg-white border border-purple-100 hover:border-purple-300 text-slate-700 font-medium">Payout Requests</Link>
+                    <Link href="/affiliate/marketing" className="p-2 rounded-xl bg-white border border-purple-100 hover:border-purple-300 text-slate-700 font-medium">Marketing Assets</Link>
+                    <Link href="/affiliate/bonuses" className="p-2 rounded-xl bg-white border border-purple-100 hover:border-purple-300 text-slate-700 font-medium">Tier & Bonuses</Link>
+                  </div>
+                </div>
+
+                {/* Admin Portal Column */}
+                <div className="p-4 rounded-2xl bg-indigo-50/50 border border-indigo-100 space-y-3">
+                  <div className="flex items-center justify-between border-b border-indigo-100 pb-2">
+                    <span className="text-xs font-bold text-indigo-900 flex items-center gap-1.5">
+                      <ShieldCheck className="w-4 h-4 text-indigo-600" />
+                      Admin Management Views (12 Features)
+                    </span>
+                    <Link href="/admin/affiliates" className="text-[11px] font-bold text-indigo-600 hover:underline flex items-center gap-0.5">
+                      <span>Open Admin</span>
+                      <ExternalLink className="w-3 h-3" />
+                    </Link>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2 text-xs">
+                    <Link href="/admin/affiliates" className="p-2 rounded-xl bg-white border border-indigo-100 hover:border-indigo-300 text-slate-700 font-medium">Admin Overview</Link>
+                    <Link href="/admin/affiliates/applications" className="p-2 rounded-xl bg-white border border-indigo-100 hover:border-indigo-300 text-slate-700 font-medium">Applications Queue</Link>
+                    <Link href="/admin/affiliates/list" className="p-2 rounded-xl bg-white border border-indigo-100 hover:border-indigo-300 text-slate-700 font-medium">Affiliate Roster</Link>
+                    <Link href="/admin/affiliates/commission-rules" className="p-2 rounded-xl bg-white border border-indigo-100 hover:border-indigo-300 text-slate-700 font-medium">Commission Rules</Link>
+                    <Link href="/admin/affiliates/commissions" className="p-2 rounded-xl bg-white border border-indigo-100 hover:border-indigo-300 text-slate-700 font-medium">Commission Approvals</Link>
+                    <Link href="/admin/affiliates/payouts" className="p-2 rounded-xl bg-white border border-indigo-100 hover:border-indigo-300 text-slate-700 font-medium">Payout Processing</Link>
+                    <Link href="/admin/affiliates/fraud" className="p-2 rounded-xl bg-white border border-indigo-100 hover:border-indigo-300 text-slate-700 font-medium">Fraud & Risk Shield</Link>
+                    <Link href="/admin/affiliates/audit-logs" className="p-2 rounded-xl bg-white border border-indigo-100 hover:border-indigo-300 text-slate-700 font-medium">Audit Security Logs</Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* CALL TO ACTION BANNER */}
         <section className="p-10 lg:p-14 rounded-3xl bg-gradient-to-r from-[#27125B] via-[#401880] to-[#8B14C2] text-white shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 animate-in fade-in zoom-in-95 duration-700">

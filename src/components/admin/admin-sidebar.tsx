@@ -86,7 +86,7 @@ export function AdminSidebar({ onCloseMobile }: { onCloseMobile?: () => void }) 
   return (
     <aside className="w-64 border-r border-border bg-card/70 backdrop-blur-xl flex flex-col h-full shrink-0">
       {/* Brand Header */}
-      <div className="p-5 border-b border-border flex items-center justify-between">
+      <div className="h-16 px-5 py-4 border-b border-border flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2.5">
           <div className="size-9 rounded-xl bg-gradient-to-tr from-[#27125B] to-[#8B14C2] flex items-center justify-center text-white font-bold shadow-md shadow-[#8B14C2]/20">
             <Shield className="size-5" />
@@ -126,11 +126,10 @@ export function AdminSidebar({ onCloseMobile }: { onCloseMobile?: () => void }) 
               key={item.href}
               href={item.href}
               onClick={onCloseMobile}
-              className={`flex items-center justify-between px-3 py-2 rounded-xl transition-all ${
-                isActive
+              className={`flex items-center justify-between px-3 py-2 rounded-xl transition-all ${isActive
                   ? 'bg-[#8B14C2]/10 text-[#8B14C2] font-semibold border border-[#8B14C2]/20 shadow-sm'
                   : 'text-muted-foreground hover:text-foreground hover:bg-muted/60'
-              }`}
+                }`}
             >
               <div className="flex items-center gap-2.5 truncate">
                 <span className={isActive ? 'text-[#8B14C2]' : 'text-muted-foreground'}>

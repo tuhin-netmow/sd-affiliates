@@ -21,6 +21,8 @@ export const metadata: Metadata = {
   },
 };
 
+import { PrototypeGuideWidget } from "@/components/shared/prototype-guide-widget";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -40,6 +42,7 @@ export default function RootLayout({
         <ToastProvider>
           <AffiliateDemoProvider>
             {children}
+            <PrototypeGuideWidget />
           </AffiliateDemoProvider>
         </ToastProvider>
       </body>
