@@ -41,6 +41,7 @@ export function AffiliateSidebar({ onCloseMobile }: { onCloseMobile?: () => void
   const unreadNotifs = notifications.filter((n) => !n.read).length;
 
   const NAV_ITEMS: NavItem[] = [
+    { label: 'Onboarding Guide', href: '/affiliate/onboarding', icon: <Sparkles className="size-4 text-[#8B14C2]" />, badge: 'START' },
     { label: 'Dashboard', href: '/affiliate/dashboard', icon: <LayoutDashboard className="size-4" /> },
     { label: 'My Links', href: '/affiliate/links', icon: <Link2 className="size-4" /> },
     { label: 'Campaigns', href: '/affiliate/campaigns', icon: <Megaphone className="size-4" /> },

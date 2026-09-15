@@ -20,7 +20,7 @@ interface AffiliateHeaderProps {
 }
 
 export function AffiliateHeader({ onToggleMobileMenu, title, subtitle }: AffiliateHeaderProps) {
-  const { activeAffiliate, notifications, resetDemo } = useAffiliateDemo();
+  const { activeAffiliate, notifications, resetDemo, openOnboarding } = useAffiliateDemo();
   const [isResetModalOpen, setIsResetModalOpen] = useState(false);
 
   const unreadCount = notifications.filter((n) => !n.read).length;
@@ -56,6 +56,16 @@ export function AffiliateHeader({ onToggleMobileMenu, title, subtitle }: Affilia
 
         {/* Right Action Bar */}
         <div className="flex items-center gap-2.5">
+          {/* Onboarding Guide Launch Button */}
+          <Link
+            href="/affiliate/onboarding"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-purple-50 text-[#8B14C2] border border-purple-200 hover:bg-purple-100 transition-all shadow-sm"
+            title="Open step-by-step onboarding guide page"
+          >
+            <Sparkles className="size-3.5 text-[#8B14C2]" />
+            <span className="hidden sm:inline">Onboarding Guide</span>
+          </Link>
+
           {/* Quick Demo Workflow Trigger */}
           <Link
             href="/demo"

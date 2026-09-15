@@ -106,6 +106,16 @@ interface AffiliateDemoContextType {
   activeAffiliate: Affiliate;
   demoWorkflow: DemoWorkflowState;
 
+  // Onboarding State
+  isOnboardingOpen: boolean;
+  onboardingCompletedSteps: string[];
+  onboardingCurrentStep: number;
+  openOnboarding: () => void;
+  closeOnboarding: () => void;
+  completeOnboardingStep: (stepId: string) => void;
+  setOnboardingCurrentStep: (step: number) => void;
+  resetOnboarding: () => void;
+
   // Setters & Navigation
   setActiveAffiliateId: (id: string) => void;
   setDemoWorkflow: React.Dispatch<React.SetStateAction<DemoWorkflowState>>;
@@ -168,6 +178,28 @@ export function AffiliateDemoProvider({ children }: { children: React.ReactNode 
 
   const [activeAffiliateId, setActiveAffiliateId] = useState<string>('aff-1');
   const [demoWorkflow, setDemoWorkflow] = useState<DemoWorkflowState>(INITIAL_DEMO_WORKFLOW);
+
+  // Onboarding State
+  const [isOnboardingOpen, setIsOnboardingOpen] = useState<boolean>(false);
+  const [onboardingCompletedSteps, setOnboardingCompletedSteps] = useState<string[]>(['welcome']);
+  const [onboardingCurrentStep, setOnboardingCurrentStep] = useState<number>(1);
+
+  const openOnboarding = useCallback(() => setIsOnboardingOpen(true), []);
+  const closeOnboarding = useCallback(() => setIsOnboardingOpen(false), []);
+  
+  const completeOnboardingStep = useCallback((stepId: string) => {
+    setOnboardingCompletedSteps((prev) => {
+      if (prev.includes(stepId)) return prev;
+      return [...prev, stepId];
+    });
+  }, []);
+
+  const resetOnboarding = useCallback(() => {
+    setOnboardingCompletedSteps(['welcome']);
+    setOnboardingCurrentStep(1);
+    setIsOnboardingOpen(true);
+    showToast('Onboarding guide reset!', 'info');
+  }, [showToast]);
 
   const activeAffiliate = useMemo(() => {
     return affiliates.find((a) => a.id === activeAffiliateId) || affiliates[0];
@@ -1392,6 +1424,14 @@ export function AffiliateDemoProvider({ children }: { children: React.ReactNode 
         activeAffiliateId,
         activeAffiliate,
         demoWorkflow,
+        isOnboardingOpen,
+        onboardingCompletedSteps,
+        onboardingCurrentStep,
+        openOnboarding,
+        closeOnboarding,
+        completeOnboardingStep,
+        setOnboardingCurrentStep,
+        resetOnboarding,
         setActiveAffiliateId,
         setDemoWorkflow,
         simulateReferralClick,

@@ -198,14 +198,32 @@ export default function RegisterPage() {
                   </button>
                 </div>
 
-                <button
-                  type="button"
-                  onClick={handleProceed}
-                  className="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-[#27125B] to-[#8B14C2] text-white font-bold text-sm shadow-xl shadow-[#27125B]/20 hover:opacity-95 transition-all flex items-center justify-center gap-2"
-                >
-                  <span>Launch {role === 'admin' ? 'Admin Panel' : 'Affiliate Dashboard'}</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (role === 'admin') router.push('/admin/affiliates')
+                      else router.push('/affiliate/onboarding')
+                    }}
+                    className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-[#27125B] via-[#431D80] to-[#8B14C2] text-white font-bold text-xs shadow-xl shadow-[#27125B]/20 hover:opacity-95 transition-all flex items-center justify-center gap-2"
+                  >
+                    <Sparkles className="w-4 h-4 text-emerald-300" />
+                    <span>Start Guided Onboarding Tour</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (role === 'admin') router.push('/admin/affiliates')
+                      else router.push('/affiliate/dashboard')
+                    }}
+                    className="w-full py-3.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-800 font-bold text-xs transition-colors flex items-center justify-center gap-1.5"
+                  >
+                    <span>Launch {role === 'admin' ? 'Admin Panel' : 'Dashboard'}</span>
+                    <ArrowRight className="w-4 h-4 text-slate-500" />
+                  </button>
+                </div>
               </div>
             ) : (
               <>

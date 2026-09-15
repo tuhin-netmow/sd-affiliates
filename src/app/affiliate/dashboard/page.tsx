@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import {
   MousePointerClick,
   UserPlus,
@@ -25,6 +26,21 @@ import { formatCurrency, formatNumber, formatPercent, getTierBadgeClass, getComm
 import { MetricCard } from '@/components/shared/metric-card';
 import { MiniAreaChart, MiniBarChart } from '@/components/shared/metric-charts';
 import { ExplanatoryCallout } from '@/components/shared/explanatory-callout';
+import { OnboardingChecklist } from '@/components/affiliate/onboarding-checklist';
+import { OnboardingWizard } from '@/components/affiliate/onboarding-wizard';
+
+function OnboardingParamHandler() {
+  const searchParams = useSearchParams();
+  const { openOnboarding } = useAffiliateDemo();
+
+  useEffect(() => {
+    if (searchParams.get('onboarding') === 'true') {
+      openOnboarding();
+    }
+  }, [searchParams, openOnboarding]);
+
+  return null;
+}
 
 export default function AffiliateDashboard() {
   const {
@@ -34,6 +50,7 @@ export default function AffiliateDashboard() {
     referralLinks,
     simulateAddDemoCustomer,
     createReferralLink,
+    openOnboarding,
   } = useAffiliateDemo();
 
   const [isCreateLinkOpen, setIsCreateLinkOpen] = useState(false);
@@ -77,6 +94,10 @@ export default function AffiliateDashboard() {
 
   return (
     <div className="space-y-8 animate-in fade-in duration-300">
+      <Suspense fallback={null}>
+        <OnboardingParamHandler />
+      </Suspense>
+
       {/* Top Welcome Banner */}
       <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#27125B] via-[#431D80] to-[#8B14C2] p-6 sm:p-8 text-white shadow-xl shadow-[#27125B]/20">
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
@@ -95,19 +116,19 @@ export default function AffiliateDashboard() {
 
           <div className="flex flex-wrap items-center gap-3">
             <button
+              onClick={() => openOnboarding()}
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white text-[#27125B] text-xs font-extrabold shadow-lg shadow-black/10 hover:bg-purple-50 active:scale-95 transition-all"
+            >
+              <Sparkles className="size-4 text-[#8B14C2]" />
+              Start Onboarding Tour
+            </button>
+            <button
               onClick={() => setIsCreateLinkOpen(true)}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white text-emerald-900 text-xs font-bold shadow-lg shadow-black/10 hover:bg-emerald-50 active:scale-95 transition-all"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 text-white text-xs font-bold border border-white/20 backdrop-blur-md active:scale-95 transition-all"
             >
               <Plus className="size-4" />
-              Create Referral Link
+              Create Link
             </button>
-            <Link
-              href="/affiliate/payouts"
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-800/80 hover:bg-emerald-800 text-white text-xs font-semibold border border-white/20 backdrop-blur-md transition-all"
-            >
-              <CreditCard className="size-4" />
-              Request Payout
-            </Link>
           </div>
         </div>
 
@@ -115,6 +136,9 @@ export default function AffiliateDashboard() {
         <div className="absolute -top-12 -right-12 size-64 rounded-full bg-white/10 blur-2xl pointer-events-none" />
         <div className="absolute -bottom-16 -left-12 size-64 rounded-full bg-teal-400/20 blur-3xl pointer-events-none" />
       </div>
+
+      {/* Onboarding Checklist Card */}
+      <OnboardingChecklist />
 
       {/* Explanatory callout for client understanding */}
       <ExplanatoryCallout
@@ -451,6 +475,9 @@ export default function AffiliateDashboard() {
           </div>
         </div>
       )}
+
+      {/* Onboarding Tour Modal Wizard */}
+      <OnboardingWizard />
     </div>
   );
 }
